@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
   spec.files         = Dir['lib/**/*', 'LICENSE.txt', 'README.md']
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'oga', '~> 2.15'
-  spec.add_runtime_dependency 'prawn', '~> 2.2.2'
+  spec.add_dependency 'oga', '~> 3.4'
+  spec.add_dependency 'prawn', '~> 2.4.0'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 end

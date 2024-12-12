@@ -22,7 +22,7 @@ RSpec.describe 'Styles' do
       let(:expected_content) { ['Some content'] }
       let(:expected_positions) do
         [[
-          (pdf_doc.page.margins[:left] + (pdf_doc.bounds.width - content_width) / 2).round(3),
+          (pdf_doc.page.margins[:left] + ((pdf_doc.bounds.width - content_width) / 2)).round(3),
           pdf_doc.y - TestUtils.default_font.ascender
         ]]
       end
@@ -134,7 +134,7 @@ RSpec.describe 'Styles' do
       text_analysis = PDF::Inspector::Text.analyze(pdf.render)
 
       expect(text_analysis.strings).to eq(%w[aaa bbb ccc])
-      expect(text_analysis.character_spacing).to eq([1.5, 0.0] * 3 + [2.0, 0.0] * 3)
+      expect(text_analysis.character_spacing).to eq(([1.5, 0.0] * 3) + ([2.0, 0.0] * 3))
     end
   end
 

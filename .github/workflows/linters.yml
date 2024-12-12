@@ -12,6 +12,10 @@ jobs:
     name: reviewdog
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        ruby: ['2.7', '3.0']
+
     steps:
       - name: Check out code
         uses: actions/checkout@v2
@@ -19,16 +23,16 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7'
+          ruby-version: ruby-version: ${{ matrix.ruby }}
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
       - uses: reviewdog/action-setup@v1
         with:
           reviewdog_version: latest
 
-      - name: Run reviewdog
+      - name: run reviewdog
         env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          reviewdog_github_api_token: ${{ secrets.github_token }}
         run: |
           reviewdog -fail-on-error -reporter=github-pr-review -runners=fasterer,rubocop
 
